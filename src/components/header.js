@@ -24,10 +24,10 @@ export default function Header() {
   return (
     <header className="flex justify-between items-center mb-8">
       <div className="flex items-center space-x-4">
-        <Avatar className="h-20 w-20">
+        {/* <Avatar className="h-20 w-20">
           <AvatarImage src="/placeholder.svg?height=80&width=80" alt="Nishant Rana" />
           <AvatarFallback>NR</AvatarFallback>
-        </Avatar>
+        </Avatar> */}
         <div>
           <h1 className="text-4xl font-bold">Nishant Rana</h1>
           <p className="text-xl text-muted-foreground">Python Developer</p>
