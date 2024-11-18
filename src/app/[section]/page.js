@@ -3,6 +3,7 @@ import About from '@/components/about'
 import Experience from '@/components/experience'
 import Skills from '@/components/skills'
 import Education from '@/components/education'
+import ContactPage from '@/components/contact'
 
 export default function SectionPage({ params }) {
   switch (params.section) {
@@ -14,6 +15,8 @@ export default function SectionPage({ params }) {
       return <Skills />
     case 'education':
       return <Education />
+    case 'contact':
+      return <ContactPage />
     default:
       notFound()
   }
