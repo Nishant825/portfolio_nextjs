@@ -13,20 +13,30 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [submittedData, setSubmittedData] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    // await new Promise(resolve => setTimeout(resolve, 1000))
 
+    // Store the submitted data
+    setSubmittedData(formData)
+
+    // Show success message
     setShowSuccess(true)
+
+    // Clear form data
     setFormData({ name: '', email: '', message: '' })
+
     setIsSubmitting(false)
 
     // Hide success message after 3 seconds
-    setTimeout(() => setShowSuccess(false), 3000)
+    // setTimeout(() => {
+    //   setShowSuccess(false)
+    // }, 3000)
   }
 
   const handleChange = (e) => {
@@ -54,6 +64,19 @@ export default function ContactPage() {
             Message sent successfully! I'll get back to you soon.
           </div>
         )}
+        
+        {/* Make sure submittedData is set before trying to render */}
+        {submittedData && showSuccess && (
+          <div className="mt-4 p-4 border border-gray-200 rounded-md bg-gray-50 dark:bg-gray-800">
+            <h3 className="font-semibold text-lg">Submitted Details</h3>
+            <ul className="space-y-2 mt-2 text-sm">
+              <li><strong>Name:</strong> {submittedData.name}</li>
+              <li><strong>Email:</strong> {submittedData.email}</li>
+              <li><strong>Message:</strong> {submittedData.message}</li>
+            </ul>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="name" className="text-sm font-medium">Name</label>
