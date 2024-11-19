@@ -28,7 +28,7 @@ export default function Header() {
           <AvatarImage src="/placeholder.svg?height=80&width=80" alt="Nishant Rana" />
           <AvatarFallback>NR</AvatarFallback>
         </Avatar> */}
-        <div>
+        <div href="/">
           <h1 className="text-4xl font-bold">Nishant Rana</h1>
           <p className="text-xl text-muted-foreground">Python Developer</p>
         </div>
