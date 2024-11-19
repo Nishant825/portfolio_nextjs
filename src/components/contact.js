@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Mail } from 'lucide-react'
@@ -14,6 +14,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [submittedData, setSubmittedData] = useState(null)
+  const [isVisible, setIsVisible] = useState(false)  // State to control zoom-in effect
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,15 +29,19 @@ export default function ContactPage() {
     // Show success message
     setShowSuccess(true)
 
+    // Trigger zoom-in effect
+    setIsVisible(true)
+
     // Clear form data
     setFormData({ name: '', email: '', message: '' })
 
     setIsSubmitting(false)
 
-    // Hide success message after 3 seconds
-    // setTimeout(() => {
-    //   setShowSuccess(false)
-    // }, 3000)
+    // Optional: Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccess(false)
+      setIsVisible(false) // Optionally hide the details after some time
+    }, 4000)
   }
 
   const handleChange = (e) => {
@@ -65,9 +70,13 @@ export default function ContactPage() {
           </div>
         )}
         
-        {/* Make sure submittedData is set before trying to render */}
+        {/* Conditionally render the Submitted Details with zoom-in animation */}
         {submittedData && showSuccess && (
-          <div className="mt-4 p-4 border border-gray-200 rounded-md bg-gray-50 dark:bg-gray-800">
+          <div
+            className={`mt-4 p-4 border border-gray-200 rounded-md bg-gray-50 dark:bg-gray-800 
+              transform transition-all duration-500 ease-out 
+              ${isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}
+          >
             <h3 className="font-semibold text-lg">Submitted Details</h3>
             <ul className="space-y-2 mt-2 text-sm">
               <li><strong>Name:</strong> {submittedData.name}</li>
